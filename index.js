@@ -20,6 +20,7 @@ export default class Onboarding extends Component {
     const pageFraction = contentOffset.x / layoutMeasurement.width;
     const page = Math.round(pageFraction);
     const isLastPage = this.props.pages.length === page + 1;
+    const { currentPage } = this.state;
     if (currentPage === this.props.callbackPage && pageFraction - page > 0.3) this.props.onNext()
     if (isLastPage && pageFraction - page > 0.3) {
       this.props.onEnd();
