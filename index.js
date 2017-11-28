@@ -20,6 +20,7 @@ export default class Onboarding extends Component {
     const pageFraction = contentOffset.x / layoutMeasurement.width;
     const page = Math.round(pageFraction);
     const isLastPage = this.props.pages.length === page + 1;
+    if (currentPage === this.props.callbackPage && pageFraction - page > 0.3) this.props.onNext()
     if (isLastPage && pageFraction - page > 0.3) {
       this.props.onEnd();
     } else {
@@ -32,10 +33,6 @@ export default class Onboarding extends Component {
     const { currentPage } = this.state;
     const nextPage = currentPage + 1;
     const offsetX = nextPage * width;
-    console.log(nextPage)
-    console.log(this.props)
-    console.log(this.props.callbackPage)
-    if (nextPage === this.props.callbackPage) this.props.onNext()
     this.refs.scroll.scrollTo({ x: offsetX, animated: true });
     this.setState({ currentPage: nextPage });
   };
