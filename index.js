@@ -21,12 +21,16 @@ export default class Onboarding extends Component {
     const page = Math.round(pageFraction);
     const isLastPage = this.props.pages.length === page + 1;
     const { currentPage } = this.state;
-    if (currentPage === this.props.callbackPage && pageFraction - page > 0.3) this.props.onNext()
     if (isLastPage && pageFraction - page > 0.3) {
       this.props.onEnd();
     } else {
       this.setState({ currentPage: page });
     }
+  };
+
+  onScrollBegin = () => {
+    const { currentPage } = this.state;
+    if (currentPage === this.props.callbackPage) this.props.onNext()
   };
 
   goNext = () => {
@@ -53,6 +57,7 @@ export default class Onboarding extends Component {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           onScroll={this.updatePosition}
+          onMomentumScrollBegin={this.onScrollBegin}
           scrollEventThrottle={100}
         >
           {pages.map(({ image, title, subtitle }, idx) => (
