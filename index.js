@@ -36,8 +36,8 @@ export default class Onboarding extends Component {
   goNext = () => {
     const { width } = Dimensions.get('window');
     const { currentPage } = this.state;
-    if (currentPage === this.props.callbackPage) this.props.onNext()
     const nextPage = currentPage + 1;
+    if (nextPage === this.props.callbackPage) this.props.onNext()
     const offsetX = nextPage * width;
     this.refs.scroll.scrollTo({ x: offsetX, animated: true });
     this.setState({ currentPage: nextPage });
